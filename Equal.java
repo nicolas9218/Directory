@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.nio.channels.*;
 
 
 public class Equal {
@@ -143,4 +144,12 @@ public class Equal {
 		}
 		}
 }
+	public void copyFile(File sourceFile, File destinationFile) throws Exception
+	{
+	FileChannel source = new FileInputStream(sourceFile).getChannel();
+	FileChannel dest = new FileOutputStream(destinationFile).getChannel();
+	source.transferTo(0, source.size(), dest);
+	source.close();
+	dest.close();
+	}
 }
