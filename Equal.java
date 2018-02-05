@@ -152,4 +152,22 @@ public class Equal {
 	source.close();
 	dest.close();
 	}
+		
+	
+	public static void Copiafile(File source, File destination) throws IOException{
+		 FileReader input = new FileReader(source);
+		    FileWriter output = new FileWriter(destination);
+		    int c;
+
+		    while ((c = input.read()) != -1){
+		    	 output.write(c);
+		    }
+		     
+
+		    input.close();
+		    
+		    output.close();
+		    
+
+		}
 }
