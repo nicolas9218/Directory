@@ -66,72 +66,24 @@ public class Equal {
 		 
 		 System.out.println("Scorro PATH1");
 		 scorriDirectory(folder_path1);
+		
+		//PROVO METODO copiaFile
 		 
-		 /*
 		 
- //Costruisco struttura controllo
+		 System.out.println("Insert PATH Source");
+		 String path_source1 = in.nextLine();		 
+		 File path_source = new File(path_source1);
+		   
+		 System.out.println("Insert PATH Destination");
+		 String path_destination1 = in.nextLine();		 
+		 File path_destination = new File(path_destination1);
 		 
-		 File path1_array[];
-		 File path2_array[];
-		
+		// copyFile(path_source, path_destination);
 		 
-		path1_array =  folder_path1.listFiles();
-		path2_array =  folder_path2.listFiles();
 		
-		
-		
-		System.out.println("");
-		System.out.println("");
-		
-		System.out.println("PATH cella 1");
-		
-			System.out.println(path1_array[1].getParent());
-			System.out.println(path1_array[1].getPath());
-			System.out.println(path1_array[1].getAbsolutePath());
-			
-			try {
-				System.out.println(path1_array[1].getCanonicalPath());
-				} catch (IOException e) {
-				e.printStackTrace();
-			}
-		
-			System.out.println(path1_array[1].getName());
-			System.out.println(path1_array[1].toPath());
-			System.out.println(path1_array[12].isDirectory());
-		
-		System.out.println("");
-		System.out.println("");
-		
-	//scorriDirectory(folder_path1);
-		
-	System.out.println("Passato tutto il disco");
-	
-	int numero_celle = path1_array.length;
-	
-	System.out.println("numero celle array:" + numero_celle);
-	
-	
-	
-		
-
-/*
-		// initialize File object
-				File file = new File("F:\\");
-
-				// check if the specified pathname is directory first
-				if(file.isDirectory()){
-					//list all files on directory
-					File[] files = file.listFiles();
-					for(File f:files){
-						
-							System.out.println(f.toString());
-						
-						}
-					}
-				}
-			}
-	
-		*/
+		 Copiafile(path_source, path_destination);
+		 
+	System.out.println("Copy done");
 		
 }
 	private static void scorriDirectory(File f) {
