@@ -107,17 +107,17 @@ public class Equal {
 		
 	
 	public static void Copiafile(File source, File destination) throws IOException{
-		 FileReader input = new FileReader(source);
-		    FileWriter output = new FileWriter(destination);
-		    int c;
+		 FileInputStream input = new FileInputStream(source);
+		 FileOutputStream output = new FileOutputStream(destination);
+		 
+		    int counter;
 
-		    while ((c = input.read()) != -1){
-		    	 output.write(c);
+		    while ((counter = input.read()) != -1){
+		    	 output.write(counter);
 		    }
 		     
 
-		    input.close();
-		    
+		    input.close();		    
 		    output.close();
 		    
 
