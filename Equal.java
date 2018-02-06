@@ -5,7 +5,7 @@ import java.nio.channels.*;
 
 public class Equal {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 		
 // controllo sistema operativo in uso
@@ -65,25 +65,43 @@ public class Equal {
 		 
 		 
 		 System.out.println("Scorro PATH1");
-		 scorriDirectory(folder_path1);
-		
-		//PROVO METODO copiaFile
+	//	 scorriDirectory(folder_path1);
+		 
+		 /*
+		  */
 		 
 		 
-		 System.out.println("Insert PATH Source");
-		 String path_source1 = in.nextLine();		 
-		 File path_source = new File(path_source1);
-		   
-		 System.out.println("Insert PATH Destination");
-		 String path_destination1 = in.nextLine();		 
-		 File path_destination = new File(path_destination1);
 		 
-		// copyFile(path_source, path_destination);
+ //Costruisco struttura controllo
 		 
-		
-		 Copiafile(path_source, path_destination);
 		 
-	System.out.println("Copy done");
+		 System.out.println("path source");
+		 String path_source1 = in.nextLine();
+		   File path_source = new File(path_source1);
+	
+
+		 System.out.println("path  destination");
+		 String path_destination1 = in.nextLine();
+		  File path_destination = new File(path_destination1);
+		 
+		// copyFile(path_source,path_destination);
+		  
+		//  Copiafile(path_source, path_destination);
+			 
+			System.out.println("Copy done");
+			
+			
+			// memoria totale disponibile
+			long num;
+			num = path_source.getTotalSpace();
+			System.out.print("Total space: " + num );
+			System.out.print(" byte");
+			System.out.println("");
+			
+			//check uguaglianza file
+			
+			checkFile(path_source , path_destination);
+			
 		
 }
 	private static void scorriDirectory(File f) {
@@ -96,7 +114,8 @@ public class Equal {
 		}
 		}
 }
-	public void copyFile(File sourceFile, File destinationFile) throws Exception
+	
+	public static void copyFile(File sourceFile, File destinationFile) throws Exception
 	{
 	FileChannel source = new FileInputStream(sourceFile).getChannel();
 	FileChannel dest = new FileOutputStream(destinationFile).getChannel();
@@ -104,7 +123,6 @@ public class Equal {
 	source.close();
 	dest.close();
 	}
-		
 	
 	public static void Copiafile(File source, File destination) throws IOException{
 		 FileInputStream input = new FileInputStream(source);
@@ -122,4 +140,33 @@ public class Equal {
 		    
 
 		}
+	
+	public static void checkFile(File source, File destination) throws IOException {
+		
+		File [] array_source = source.listFiles();
+		File [] array_destination = destination.listFiles();
+		
+		
+		
+		int length_array_source = array_source.length;
+		int length_array_destination = array_destination.length;
+		
+		if (length_array_source != length_array_destination){
+			
+			System.out.println("Strutture dati diverse, avvio copia");
+		} else 
+		{
+			System.out.println("Stesso numero di dati");
+			for(int i = 0;  i < array_source.length; i++ ){
+				if (array_source[i].getName() != array_destination[i].getName()){
+				//	Copiafile(source, destination);
+					System.out.println("Dati diversi");
+				}
+			}
+		}
+			
+		
+		
+		
+	}
 }
