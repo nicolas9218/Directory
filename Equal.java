@@ -77,12 +77,12 @@ public class Equal {
 		 
 		 System.out.println("path source");
 		 String path_source1 = in.nextLine();
-		   File path_source = new File(path_source1);
+		 File path_source = new File(path_source1);
 	
 
 		 System.out.println("path  destination");
 		 String path_destination1 = in.nextLine();
-		  File path_destination = new File(path_destination1);
+		 File path_destination = new File(path_destination1);
 		 
 		// copyFile(path_source,path_destination);
 		  
@@ -109,22 +109,19 @@ public class Equal {
 			System.out.println("Metodo getPath  " + path_source.getPath());
 			
 			//check uguaglianza file
-		//	checkFile(path_source , path_destination);
 			
 			
+			checkFile(path_source , path_destination);
+			
+		//	Copiafile(path_source, path_destination);
 			
 			//nuovo codice
 			System.out.println("");
 			
-			String a[] = path_source.list(); //creo un array di stringhe e lo riempio con la lista dei files presenti nella directory
-			System.out.println("stampo la lista dei files contenuti nella directory:");
-			int j = 0;
-			for (int i=0;i<a.length;i++)
-			{
-			j = j + 1;
-			System.out.println(j + ". " + a[i]);
+		
 			
-			}		
+			
+		
 }
 	private static void scorriDirectory(File f) {
 		File [] lista = f.listFiles();
@@ -168,30 +165,82 @@ public class Equal {
 		File [] array_source = source.listFiles();
 		File [] array_destination = destination.listFiles();
 		
-	
+		String file_source[] = source.list(); 
+		String file_destination[] = destination.list(); 
+		
+		boolean same = false;
 		
 		int length_array_source = array_source.length;
 		int length_array_destination = array_destination.length;
 		
+		mergeSort(file_source);
+		mergeSort(file_destination);
+		
+		
 		if (length_array_source != length_array_destination){
 			
 			System.out.println("Strutture dati diverse, avvio copia");
+			
+			Copiafile(source, destination);
+			
+		
+			
 		} else 
+			
 		{
-			System.out.println("Stesso numero di dati");
-			for(int i = 0;  i < array_source.length; i++ ){
-				if (array_source[i]!= array_destination[i].getCanonicalFile()){
-				//	Copiafile(source, destination);
-					System.out.println("Dati diversi");
-					System.out.println("Sorgente " +array_source[i].getCanonicalFile()); 
+			System.out.println("Stesso numero di dati");			
+			System.out.println("");
+			System.out.println("Ordinamento avviato:");
+			
+			System.out.println("Ordinamento primo path:");
+			Arrays.sort(file_source);
+			System.out.println("");
+			System.out.println("Done");
+			System.out.println("Ordinamento secondo path:");
+			Arrays.sort(file_destination);
+			System.out.println("");
+			System.out.println("Done");
+			
+			
+			System.out.println("Check dati IgnoreCase");
+			for(int k=0; k< file_source.length; k++){				
+				
+				if(file_source[k].equals(file_destination[k])){
+					same = true;
 					
-					System.out.println("Destinazione " +array_destination[i].getCanonicalFile()); 
-				}
+				} else 						
+					same = false;
+					
+				
+			}
+			
+			System.out.println("");
+			System.out.println("Stessi file:  " + same);
+			
 			}
 		}
+	
+	
+	 public static void mergeSort(String[] names) {
+	        if (names.length > 2) {
+	            String[] left = new String[names.length / 2];
+	            String[] right = new String[names.length - names.length / 2];
+
+	            for (int i = 0; i < left.length; i++) {
+	                left[i] = names[i];
+	            }
+
+	            for (int i = 0; i < right.length; i++) {
+	                right[i] = names[i + names.length / 2];
+	            }
+
+	            mergeSort(left);
+	            mergeSort(right);
+	           
+	        }
+	    }
 			
 		
 		
 		
 	}
-}
