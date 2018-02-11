@@ -113,6 +113,7 @@ public class Equal {
 			
 			checkFile(path_source , path_destination);
 			
+			
 		//	Copiafile(path_source, path_destination);
 			
 			//nuovo codice
@@ -160,6 +161,23 @@ public class Equal {
 
 		}
 	
+	public static void CopiafileString(String source, String destination) throws IOException{
+		 FileInputStream input = new FileInputStream(source);
+		 FileOutputStream output = new FileOutputStream(destination);
+		 
+		    int counter;
+
+		    while ((counter = input.read()) != -1){
+		    	 output.write(counter);
+		    }
+		     
+
+		    input.close();		    
+		    output.close();
+		    
+
+		}
+	
 	public static void checkFile(File source, File destination) throws IOException {
 		
 		File [] array_source = source.listFiles();
@@ -181,7 +199,14 @@ public class Equal {
 			
 			System.out.println("Strutture dati diverse, avvio copia");
 			
-			Copiafile(source, destination);
+		
+			
+			
+			for(int k=0; k< file_source.length; k++){
+				CopiafileString(source.getPath() + "/"  + file_source[k] , destination.getPath() + "/" + file_source[k]);
+				
+				
+			}
 			
 		
 			
@@ -191,15 +216,16 @@ public class Equal {
 			System.out.println("Stesso numero di dati");			
 			System.out.println("");
 			System.out.println("Ordinamento avviato:");
+			System.out.println("");
 			
 			System.out.println("Ordinamento primo path:");
 			Arrays.sort(file_source);
-			System.out.println("");
 			System.out.println("Done");
+			System.out.println("");
 			System.out.println("Ordinamento secondo path:");
 			Arrays.sort(file_destination);
-			System.out.println("");
 			System.out.println("Done");
+			System.out.println("");
 			
 			
 			System.out.println("Check dati IgnoreCase");
