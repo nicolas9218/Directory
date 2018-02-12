@@ -30,48 +30,6 @@ public class Equal {
 		
 // Inizializzazione PATH da controllare
 
-		//PATH 1
-		System.out.println("Inserisci PATH 1:");
-		String path1 = in.nextLine();
-		
-		System.out.println("Inserisci PATH 2:");
-		String path2 = in.nextLine();
-		
-		System.out.println(" PATH 1:" + path1);  //controllo PATH
-		System.out.println(" PATH 1:" + path2);	 //controllo PATH
-		
-		
-// Controllo PATH	
-		 final  File folder_path1 = new File(path1);
-		 final  File folder_path2 = new File(path2);
-		 
-		 System.out.println("Reading files under the folder "+ folder_path1.getAbsolutePath());
-		 System.out.println("Reading files under the folder "+ folder_path2.getAbsolutePath());
-		 
-		 
-//Controllo uguaglianza PATH
-		 
-		 if( folder_path1.equals(folder_path2)) {
-			 System.out.println("Cartelle uguali");
-			 
-		 }
-		 
-		 else 
-			 System.out.println("Cartelle diverse");
-		 
-	// controllo partizione /dev/sdb3	 
-		 
-	//	 System.out.println("Directory /dev TRUE or FALSE:" + folder_path1.isDirectory());
-		 
-		 
-		 System.out.println("Scorro PATH1");
-	//	 scorriDirectory(folder_path1);
-		 
-		 /*
-		  */
-		 
-		 
-		 
  //Costruisco struttura controllo
 		 
 		 
@@ -101,12 +59,7 @@ public class Equal {
 			
 			
 		
-			System.out.println("");
-			System.out.println("Metodo getAbsolutePath  " + path_source.getAbsolutePath());
-			System.out.println("Metodo getName  " + path_source.getName());
-			System.out.println("Metodo getCanonicalPath  " + path_source.getCanonicalPath());
-			System.out.println("Metodo getParent  " + path_source.getParent());
-			System.out.println("Metodo getPath  " + path_source.getPath());
+			
 			
 			//check uguaglianza file
 			
@@ -180,63 +133,50 @@ public class Equal {
 	
 	public static void checkFile(File source, File destination) throws IOException {
 		
-		File [] array_source = source.listFiles();
-		File [] array_destination = destination.listFiles();
+	//	File [] array_source = source.listFiles();
+		//File [] array_destination = destination.listFiles();
 		
 		String file_source[] = source.list(); 
-		String file_destination[] = destination.list(); 
+		int length_array_source = file_source.length;
+
+		String file_destination[] = new String [length_array_source];
+		file_destination = destination.list(); 
+		int length_array_destination = file_destination.length;
+		
 		
 		boolean same = false;
 		
-		int length_array_source = array_source.length;
-		int length_array_destination = array_destination.length;
+		System.out.println("");
+		System.out.println("Ordinamento avviato:");
+		System.out.println("");
 		
-		mergeSort(file_source);
-		mergeSort(file_destination);
+		System.out.println("Ordinamento primo path:");
+		Arrays.sort(file_source);
+		System.out.println("Done");
+		System.out.println("");
+		System.out.println("Ordinamento secondo path:");
+		Arrays.sort(file_destination);
+		System.out.println("Done");
+		System.out.println("");
 		
-		
-		if (length_array_source != length_array_destination){
+		System.out.println("Check dati IgnoreCase");
+		for(int k=0; k< file_source.length; k++){				
 			
-			System.out.println("Strutture dati diverse, avvio copia");
-			
-		
-			
-			
-			for(int k=0; k< file_source.length; k++){
-				CopiafileString(source.getPath() + "/"  + file_source[k] , destination.getPath() + "/" + file_source[k]);
+			if(file_source[k].equals(file_destination[k])){
+				same = true;
 				
+			} else 						
+				same = false;
+			for(int j=0; j< file_source.length; j++){
+			//	String path = destination.getPath() + "/" + file_source[j];
+				destination.delete();
+				CopiafileString(source.getPath() + "/"  + file_source[j] , destination.getPath() + "/" + file_source[j]);
+			
+		}
+						
+			System.out.println("" );
+			System.out.println(k + " Copy Done");
 				
-			}
-			
-		
-			
-		} else 
-			
-		{
-			System.out.println("Stesso numero di dati");			
-			System.out.println("");
-			System.out.println("Ordinamento avviato:");
-			System.out.println("");
-			
-			System.out.println("Ordinamento primo path:");
-			Arrays.sort(file_source);
-			System.out.println("Done");
-			System.out.println("");
-			System.out.println("Ordinamento secondo path:");
-			Arrays.sort(file_destination);
-			System.out.println("Done");
-			System.out.println("");
-			
-			
-			System.out.println("Check dati IgnoreCase");
-			for(int k=0; k< file_source.length; k++){				
-				
-				if(file_source[k].equals(file_destination[k])){
-					same = true;
-					
-				} else 						
-					same = false;
-					
 				
 			}
 			
@@ -244,7 +184,7 @@ public class Equal {
 			System.out.println("Stessi file:  " + same);
 			
 			}
-		}
+	
 	
 	
 	 public static void mergeSort(String[] names) {
