@@ -159,7 +159,7 @@ public class Equal {
 		System.out.println("Done");
 		System.out.println("");
 		
-		System.out.println("Check dati IgnoreCase");
+		System.out.println("Check dati ");
 		for(int k=0; k< file_source.length; k++){				
 			
 			if(file_source[k].equals(file_destination[k])){
@@ -167,18 +167,24 @@ public class Equal {
 				
 			} else 						
 				same = false;
-			for(int j=0; j< file_source.length; j++){
-			//	String path = destination.getPath() + "/" + file_source[j];
-				destination.delete();
-				CopiafileString(source.getPath() + "/"  + file_source[j] , destination.getPath() + "/" + file_source[j]);
+			
 			
 		}
+		
+		if (same == false){	
+			int count = 1;
+			for(int j=0; j< file_source.length; j++){
+			
+					CopiafileString(source.getPath() + "/"  + file_source[j] , destination.getPath() + "/" + file_source[j]);
 						
 			System.out.println("" );
-			System.out.println(k + " Copy Done");
+			System.out.println( count + " Copy Done");
+			count ++;
 				
 				
 			}
+		}
+		
 			
 			System.out.println("");
 			System.out.println("Stessi file:  " + same);
