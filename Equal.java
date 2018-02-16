@@ -63,11 +63,22 @@ public class Equal {
 			
 			//check uguaglianza file
 			
+			//CopiafileString(path_source1 ,path_destination1);
 			
+			long startTime = System.currentTimeMillis();
+			
+			//scorriDirectoryLast(path_source , path_destination);
 			checkFile(path_source , path_destination);
+		//	scorriDirectory(path_source);
+			long endTime = System.currentTimeMillis();
+			long seconds = (endTime - startTime) / 1000;	
+			
+			
+			System.out.println("Programma eseguito in " + seconds + " secondi");
 			
 			
 		//	Copiafile(path_source, path_destination);
+			//copyFile(path_source, path_destination);
 			
 			//nuovo codice
 			System.out.println("");
@@ -88,7 +99,35 @@ public class Equal {
 		}
 }
 	
+	
+	private static void scorriDirectoryLast(File source , File destination) throws Exception {
+		File [] lista = source.listFiles();
+		File dir;
+		for (int i=0; i<lista.length; i++) {
+		if ( !lista[i].isDirectory() ) {
+		System.out.println( lista[i].getPath() );
+		//	checkFile(source, destination);
+		} else {
+			System.out.println("Path che sto passando a dir:" +destination.getPath() +  "/" + lista[i]);
+			dir = new File (destination.getPath() + lista[i]);
+			dir.mkdir();
+			
+		scorriDirectoryLast(source, destination );
+		}
+		}
+}
 	public static void copyFile(File sourceFile, File destinationFile) throws Exception
+	{
+	FileChannel source = new FileInputStream(sourceFile).getChannel();
+	FileChannel dest = new FileOutputStream(destinationFile).getChannel();
+	source.transferTo(0, source.size(), dest);
+	source.close();
+	dest.close();
+	}
+	
+	
+	
+	public static void copyFileString(String sourceFile, String destinationFile) throws Exception
 	{
 	FileChannel source = new FileInputStream(sourceFile).getChannel();
 	FileChannel dest = new FileOutputStream(destinationFile).getChannel();
@@ -131,17 +170,22 @@ public class Equal {
 
 		}
 	
-	public static void checkFile(File source, File destination) throws IOException {
+	public static void checkFile(File source, File destination) throws Exception {
 		
-	//	File [] array_source = source.listFiles();
-		//File [] array_destination = destination.listFiles();
+		File [] array_source = source.listFiles();
+		File [] array_destination = destination.listFiles();
+		
+		
+		
+		
+		
 		
 		String file_source[] = source.list(); 
 		int length_array_source = file_source.length;
 
 		String file_destination[] = new String [length_array_source];
 		file_destination = destination.list(); 
-		int length_array_destination = file_destination.length;
+	
 		
 		
 		boolean same = false;
@@ -159,6 +203,12 @@ public class Equal {
 		System.out.println("Done");
 		System.out.println("");
 		
+		// inizio nuovo codice
+		for (int i=0; i<array_source.length; i++) {
+			
+		if ( array_source[i].isFile() ) {
+		System.out.println( array_source[i].getPath() );
+		
 		System.out.println("Check dati ");
 		for(int k=0; k< file_source.length; k++){				
 			
@@ -174,9 +224,13 @@ public class Equal {
 		if (same == false){	
 			int count = 1;
 			for(int j=0; j< file_source.length; j++){
+			String path_source_String =source.getPath() + "/"  + file_source[j];
+			String path_destination_String = destination.getPath() + "/" + file_source[j];
 			
-					CopiafileString(source.getPath() + "/"  + file_source[j] , destination.getPath() + "/" + file_source[j]);
-						
+				//	CopiafileString(path_source_String , path_destination_String);
+			copyFileString(path_source_String , path_destination_String);
+	
+			
 			System.out.println("" );
 			System.out.println( count + " Copy Done");
 			count ++;
@@ -184,10 +238,23 @@ public class Equal {
 				
 			}
 		}
-		
-			
+					
 			System.out.println("");
 			System.out.println("Stessi file:  " + same);
+			
+		} if (array_source[i].isDirectory()) {
+				
+			// devo creare nuova directory nel path nuovo
+			System.out.println("");
+			System.out.println("Devo creare nuova directory nel path nuovo");
+			
+			File dir = new File (destination.getPath() + "/" +array_source[i]);
+			dir.mkdir();
+			//checkFile(array_source[i] , dir);
+		}
+		}
+		
+		
 			
 			}
 	
