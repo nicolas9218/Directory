@@ -175,40 +175,67 @@ public class Prova {
 		File [] array_source = source.listFiles();
 		File [] array_destination = destination.listFiles();
 		
-		
-		
-		
-		String file_source[] = source.list(); 
-		int length_array_source = file_source.length;
+		String string_source[] = source.list(); 
+		int length_array_source = string_source.length;
 
-		String file_destination[] = new String [length_array_source];
-		file_destination = destination.list(); 
+		String string_destination[] = new String [length_array_source];
+		string_destination = destination.list(); 
 		
-		
-		for (int i = 0; i< file_source.length; i++){
-			System.out.println("");
-			System.out.println("Array String sorgente:" + file_source[i]);
-			System.out.println("Array File sorgente:" + array_source[i]);
-			System.out.println("");
-			
-			if(array_source[i].isDirectory()){
-				System.out.println("Questa è una cartella");
-				System.out.println("");
-			}
-		}
-	/*
-		
-		for (int i = 0; i< file_source.length; i++){
-			File dir = new File (destination.getPath() + "/" +file_source[i]);
-			dir.mkdir();
-			System.out.println("path che sto passando:" + destination.getPath() + "/" +file_source[i]);
-			System.out.println("Contenuto: " +  file_source[i]);
+		boolean same = false;
+		int file_equal = 0;
+		int file_not_equal = 0;
+	
+			for(int j=0; j< array_source.length; j++){
+				for (int k = 0; k< array_destination.length; k++){
+					
+					String path_source_String =source.getPath() + "/"  + string_source[j];
+					String path_destination_String = destination.getPath() + "/" + string_destination[k];
+					
+									
+					
+					if(!array_source[j].isDirectory()){ 
+						if(string_source[j].equals(string_destination[k])){
+							
+							file_equal ++;
+							same = true;
+						}
+						
+				
+						}
+					
+				/*	else {
+						File dir = new File (destination.getPath() + "/" + string_source[j]);
+						dir.mkdir();
+					//	checkFile(array_source[j] , dir );
+					}
 			*/
-		}
+					}
+				
+				if (same == false){
+					System.out.println("File False :" + string_source[j]);
+					System.out.println("Path sorgente :" + source.getPath() + "/"  + string_source[j]);
+					System.out.println("Path destinazione :" + destination.getPath() + "/"  + string_source[j]);
+					
+					String path_source = source.getPath() + "/"  + string_source[j];
+					String path_destination = destination.getPath() + "/"  + string_source[j];
+					copyFileString(path_source , path_destination);
+				}
+								
+				System.out.println("Same: " + same);				
+				same = false;
 			
 			
-	
-	
+				}
+				
+				file_not_equal = length_array_source-file_equal;
+				
+				System.out.println("File totali path source : " + length_array_source);			
+				System.out.println("File uguali: " + file_equal);			
+				System.out.println("File diversi : " + file_not_equal);
+					
+			}
+			
+			
 	
 	 public static void mergeSort(String[] names) {
 	        if (names.length > 2) {
