@@ -3,7 +3,7 @@ import java.util.*;
 import java.nio.channels.*;
 
 
-public class Prova {
+public class Prova_Last {
 
 	public static void main(String[] args) throws Exception {
 		
@@ -22,6 +22,7 @@ public class Prova {
 		}
 	
 		System.out.println("Root utilizzata " + root);
+
 		
 		
 // Inizializzazione INPUT
@@ -32,58 +33,51 @@ public class Prova {
 
  //Costruisco struttura controllo
 		 
-		 
+		System.out.println("");
 		 System.out.println("path source");
 		 String path_source1 = in.nextLine();
 		 File path_source = new File(path_source1);
 	
-
+		 System.out.println("");
 		 System.out.println("path  destination");
 		 String path_destination1 = in.nextLine();
 		 File path_destination = new File(path_destination1);
 		 
-		// copyFile(path_source,path_destination);
-		  
-		//  Copiafile(path_source, path_destination);
-			 
-			System.out.println("Copy done");
-			
+	
 			
 			// memoria totale disponibile
-			long num;
-			num = path_source.getTotalSpace();
-			System.out.print("Total space: " + num );
+			long total_space;
+			long usable_space;
+			long busy_space;
+			
+			System.out.println("");
+			total_space = path_source.getTotalSpace();
+			usable_space = path_source.getUsableSpace();
+			busy_space= total_space-usable_space;
+			
+			System.out.print("Total space: " + total_space );
 			System.out.print(" byte");
 			System.out.println("");
 			
+			System.out.print("Usable space: " + usable_space );
+			System.out.print(" byte");
+			System.out.println("");
 			
-			
-		
-			
-			
-			//check uguaglianza file
-			
-			//CopiafileString(path_source1 ,path_destination1);
+			System.out.print("Busy space: " + busy_space );
+			System.out.print(" byte");
+			System.out.println("");
 			
 			long startTime = System.currentTimeMillis();
 			
-			//scorriDirectoryLast(path_source , path_destination);
+			//metodo checkFile tra file e cartelle
 			checkFile(path_source , path_destination);
-		//	scorriDirectory(path_source);
+	
 			long endTime = System.currentTimeMillis();
 			long seconds = (endTime - startTime) / 1000;	
 			
-			
+			System.out.println("");
 			System.out.println("Programma eseguito in " + seconds + " secondi");
 			
-			
-		//	Copiafile(path_source, path_destination);
-			//copyFile(path_source, path_destination);
-			
-			//nuovo codice
-			System.out.println("");
-			
-		
 			
 			
 		
@@ -175,58 +169,64 @@ public class Prova {
 		File [] array_source = source.listFiles();
 		File [] array_destination = destination.listFiles();
 		
-		boolean same = true;
-		
-		
-		if(array_source.length != array_destination.length){
-			System.out.println("Devo far partire la copia sicuramente");
-		}
-		else  {
-			
 		String string_source[] = source.list(); 
 		int length_array_source = string_source.length;
 
 		String string_destination[] = new String [length_array_source];
 		string_destination = destination.list(); 
 		
+		boolean same = false;
+		boolean same_folder = false;
+		int file_equal = 0;
+		int file_not_equal = 0;
 		
-		for (int i = 0; i< string_source.length; i++){
-			for (int k = 0; k< string_source.length; k++){
-				
+	
+	
+			for(int j=0; j< array_source.length; j++){
+				for (int k = 0; k< array_destination.length; k++){
 					
-					if(string_source[i].equals(string_destination[k])){
-						if(array_source[i].isFile()){							
-						same = true;
-						System.out.println("Check equals, File found");
+					String path_source_String =source.getPath() + "/"  + string_source[j];
+					String path_destination_String = destination.getPath() + "/" + string_destination[k];
+					
+					
+						if( string_source[j].equals(string_destination[k])){
+							if(array_source[j].isDirectory() && array_destination[k].isDirectory()){
+								checkFile(array_source[j] , array_destination[k] );
+							}
+							
+							same = true;
+						
+						}
 						
 					}
-						if(array_source[i].isDirectory()){
-							System.out.println("Questa è una cartella");
-							System.out.println("");
-							checkFile(array_source[i] ,array_destination[k] );
-							System.out.println("");
-					}
-				}
-					if(string_source[i] != (string_destination[k])){
-						same = false;
-						System.out.println(" Not equals");
-						
-						
+					
 				
-			
+				if (same == false) {
+					System.out.println("Same :" + same);
+					System.out.println("File diverso :" + string_source[j] );
+					
+					if(array_source[j].isFile()){
+						String path_source = source.getPath() + "/"  + string_source[j];
+						String path_destination = destination.getPath() + "/"  + string_source[j];
+						copyFileString(path_source , path_destination);
+					}
+					
+					if(array_source[j].isDirectory()){
+						
+						File dir = new File (destination.getPath() + "/" + string_source[j]);
+						dir.mkdir();
+						checkFile(array_source[j] , dir );
+					
+					}
 				}
-			
+				
+				same= false;
+				
+						}
 			}
-		
-			System.out.println("");
-			System.out.println("Array String sorgente:" + string_source[i]);
-			System.out.println("");
 			
-		
-		}
-		}
-
-		}
+					
+			
 			
 			
 	
