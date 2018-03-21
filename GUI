@@ -3,9 +3,10 @@ import java.awt.event.*;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
+
 import static java.awt.GridBagConstraints.*;
 
-public class ButtonHandler extends Frame implements WindowListener,ActionListener , TextListener{
+public class Gui extends Frame implements WindowListener,ActionListener , TextListener{
 	
 	
    
@@ -22,33 +23,37 @@ public class ButtonHandler extends Frame implements WindowListener,ActionListene
             static	  JPanel pannello = new JPanel();
             static    JLabel immagine = new JLabel(new ImageIcon("linux_and_windows.jpg"));
             static		ImageIcon jpg = new ImageIcon("linux_and_windows.jpg");
-            static    JLabel label = new JLabel("Insert Path1:");
-            static    JLabel label_1 = new JLabel("Insert Path2:");
+            static    JLabel label = new JLabel("Insert PATH_1:");
+            static    JLabel label_1 = new JLabel("Insert PATH_2:");
 
         public static void main(String[] args) {
         		
         		
         	
-               frame.setSize(600, 400);		//finestra programma
+               frame.setSize(900, 600);		//finestra programma
                frame.setLocation(300, 200);
+               frame.setContentPane(new JLabel(new ImageIcon("copertina.png")));
               
             	
             	pannello.setLayout(null); //contenuto finestra programma
-               	pannello.setBackground(Color.LIGHT_GRAY);
+               //	pannello.setBackground(Color.LIGHT_GRAY);
         
-                pushAlgoritmo.setBounds(200, 300,200, 30);
-               label.setSize(100,30);
+                pushAlgoritmo.setBounds(220, 250,200, 30);
+                label.setSize(1000,30);
+             
+               label.setForeground(Color.BLUE);
                label_1.setSize(100,170);
+               label_1.setForeground(Color.GREEN);
                
                 text.setBounds(10, 30,200, 30);
                 text_2.setBounds(10, 100,200, 30);
                 
                frame.getContentPane().add(pannello);  //aggiungo il pannello al frame
-               pannello.add(pushAlgoritmo); //agiungo il tasto per eseguire l'algoritmo
-               pannello.add(text); //aggiungo la finestra per inserire il path
-               pannello.add(text_2); //aggiungo la finestra per inserire il path2
-               pannello.add(label);
-               pannello.add(label_1);
+               frame.add(pushAlgoritmo); //agiungo il tasto per eseguire l'algoritmo
+               frame.add(text); //aggiungo la finestra per inserire il path
+               frame.add(text_2); //aggiungo la finestra per inserire il path2
+               frame.add(label);
+               frame.add(label_1);
                
                frame.setVisible(true);
                pannello.setVisible(true);
@@ -59,16 +64,11 @@ public class ButtonHandler extends Frame implements WindowListener,ActionListene
                 ButtonHandler listener = new ButtonHandler("ciao");
                 pushAlgoritmo.addActionListener(listener);
                 
-                
-               
-                
-            	
-                                            
-       
+           
 
         }
 
-        public ButtonHandler(String title) { //metodo che inizializza i tasti 
+        public Gui(String title) { //metodo che inizializza i tasti 
 
                 super(title);                
                 
