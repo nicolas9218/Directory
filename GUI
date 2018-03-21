@@ -1,0 +1,153 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.*;
+import static java.awt.GridBagConstraints.*;
+
+public class ButtonHandler extends Frame implements WindowListener,ActionListener , TextListener{
+	
+	
+   
+        Button b; //creo un oggeto di tipo Button
+  //      private int numClicks = 0;  //variabile privata per tenere traccia dei click del mouse
+
+        	static    TextField text = new TextField(40);  //creo oggetto caselle di testo larga 40
+        	static    TextField text_2 = new TextField(40);
+        	
+    		static   ButtonHandler window = new ButtonHandler("First GUI Nick"); 
+    		static  JButton pushAlgoritmo = new JButton ("Run Data Check");
+    	
+            static    JFrame frame = new JFrame("GUI Data Check Nick");
+            static	  JPanel pannello = new JPanel();
+            static    JLabel immagine = new JLabel(new ImageIcon("linux_and_windows.jpg"));
+            static		ImageIcon jpg = new ImageIcon("linux_and_windows.jpg");
+            static    JLabel label = new JLabel("Insert Path1:");
+            static    JLabel label_1 = new JLabel("Insert Path2:");
+
+        public static void main(String[] args) {
+        		
+        		
+        	
+               frame.setSize(600, 400);		//finestra programma
+               frame.setLocation(300, 200);
+              
+            	
+            	pannello.setLayout(null); //contenuto finestra programma
+               	pannello.setBackground(Color.LIGHT_GRAY);
+        
+                pushAlgoritmo.setBounds(200, 300,200, 30);
+               label.setSize(100,30);
+               label_1.setSize(100,170);
+               
+                text.setBounds(10, 30,200, 30);
+                text_2.setBounds(10, 100,200, 30);
+                
+               frame.getContentPane().add(pannello);  //aggiungo il pannello al frame
+               pannello.add(pushAlgoritmo); //agiungo il tasto per eseguire l'algoritmo
+               pannello.add(text); //aggiungo la finestra per inserire il path
+               pannello.add(text_2); //aggiungo la finestra per inserire il path2
+               pannello.add(label);
+               pannello.add(label_1);
+               
+               frame.setVisible(true);
+               pannello.setVisible(true);
+               
+       
+               
+               
+                ButtonHandler listener = new ButtonHandler("ciao");
+                pushAlgoritmo.addActionListener(listener);
+                
+                
+               
+                
+            	
+                                            
+       
+
+        }
+
+        public ButtonHandler(String title) { //metodo che inizializza i tasti 
+
+                super(title);                
+                
+                setLayout(new FlowLayout());
+                addWindowListener(this);             
+                        
+                b = new Button("First Button");                 
+              
+               
+                
+                b.addActionListener(this);  
+                text.addTextListener(this);
+                
+        }
+        
+        
+        //metodo che cattura i tasti pigiati
+        
+        public void actionPerformed(ActionEvent e) {
+        	Object source = e.getSource();
+        	//A seconda dell'oggetto eseguo codice differente
+        	if(source.equals(b)) {
+        	//	 numClicks++;
+              //   text.setText("Button Clicked " + numClicks + " times");
+                 window.setBackground(Color.BLUE);
+        	} 
+       
+                
+        	
+  
+        	
+        	
+        	if(source.equals(pushAlgoritmo)) {
+        		 immagine.setIcon(new ImageIcon("linux.jpg"));                
+                 frame.setContentPane(new JLabel(new ImageIcon("UbuntuGif.gif")));
+                 frame.pack();
+                 frame.setVisible(true);
+                 /*
+                 try {
+                	
+					//TimeUnit.SECONDS.sleep(5);
+				//	Thread.sleep(1000);
+				 frame.setContentPane(new JLabel(new ImageIcon("gifProva.gif")));
+	                frame.pack();  
+	                frame.setVisible(true);
+				
+				} catch (InterruptedException e1) {
+						e1.printStackTrace();
+				}
+                
+                 */
+        	}
+        	
+        	     		
+        	
+        	    
+            
+        }
+      
+
+        public void windowClosing(WindowEvent e) {
+                dispose();
+                System.exit(0);
+        }
+
+        public void windowOpened(WindowEvent e) {}
+        public void windowActivated(WindowEvent e) {}
+        public void windowIconified(WindowEvent e) {}
+        public void windowDeiconified(WindowEvent e) {}
+        public void windowDeactivated(WindowEvent e) {}
+        public void windowClosed(WindowEvent e) {}
+
+		// Metodo che cattura gli eventi scritti nel riquadro Text
+		public void textValueChanged(TextEvent e) {
+				Object source = e.getSource();
+		
+				if(source.equals(text)) {           
+            	  text.setText("E' stato scritto qualcosa");
+            	}
+		}
+
+}
